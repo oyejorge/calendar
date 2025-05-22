@@ -1,5 +1,5 @@
 {
-  "name": "event-calendar",
+  "name": "@event-calendar/core",
   "private": true,
   "version": "4.3.0",
   "type": "module",
@@ -16,5 +16,6 @@
     "svelte": "^5.28.6",
     "vite": "^6.3.5",
     "vite-plugin-banner": "^0.8.1"
-  }
+  },
+  "svelte": "./packages/core/src/index.svelte.js"
 }
