@@ -17,5 +17,8 @@
     "vite": "^6.3.5",
     "vite-plugin-banner": "^0.8.1"
   },
-  "svelte": "./packages/core/src/index.svelte.js"
+  "svelte": "./packages/core/src/index.svelte.js",
+  "dependencies": {
+    "typescript": "^5.8.3"
+  }
 }
