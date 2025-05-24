@@ -6,6 +6,7 @@ export function createOptions(plugins) {
     let options = {
         allDayContent: undefined,
         allDaySlot: true,
+        baseEventComponent: undefined,
         buttonText: {
             today: 'today',
         },

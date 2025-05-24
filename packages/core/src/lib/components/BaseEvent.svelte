@@ -16,7 +16,8 @@
 
     let {
         displayEventEnd, eventBackgroundColor, eventColor, eventContent, eventClick, eventDidMount, eventClassNames,
-        eventMouseEnter, eventMouseLeave, eventTextColor, resources, theme, _view, _intlEventTime
+        eventMouseEnter, eventMouseLeave, eventTextColor, resources, theme, _view, _intlEventTime,
+        baseEventComponent,
     } = getContext('state');
 
     let event = $derived(chunk.event);
@@ -62,27 +63,38 @@
     let onkeydown = $derived(onclick && keyEnter(onclick));
     let onmouseenter = $derived(createHandler($eventMouseEnter, display));
     let onmouseleave = $derived(createHandler($eventMouseLeave, display));
+
+    let BaseEventComponent = $derived($baseEventComponent);
+
+    let properties = $derived({
+        class: classNames,
+        style,
+        role: onclick ? 'button' : undefined,
+        tabindex: onclick ? 0 : undefined,
+        onclick,
+        onkeydown,
+        onmouseenter,
+        onmouseleave,
+        onpointerdown,
+    })
+
 </script>
 
-<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<article
-    bind:this={el}
-    class={classNames}
-    {style}
-    role={onclick ? 'button' : undefined}
-    tabindex={onclick ? 0 : undefined}
-    {onclick}
-    {onkeydown}
-    {onmouseenter}
-    {onmouseleave}
-    {onpointerdown}
->
-    {#snippet defaultBody()}
-        <div class={$theme.eventBody} use:setContent={content}></div>
-    {/snippet}
-    {#if body}
-        {@render body(defaultBody, bgColor, txtColor)}
-    {:else}
-        {@render defaultBody()}
-    {/if}
-</article>
+{#if BaseEventComponent}
+    <BaseEventComponent bind:el {event} {...properties} />
+{:else}
+    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+    <article
+        bind:this={el}
+        {...properties}
+    >
+        {#snippet defaultBody()}
+            <div class={$theme.eventBody} use:setContent={content}></div>
+        {/snippet}
+        {#if body}
+            {@render body(defaultBody, bgColor, txtColor)}
+        {:else}
+            {@render defaultBody()}
+        {/if}
+    </article>
+{/if}
