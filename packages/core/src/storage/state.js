@@ -30,7 +30,6 @@ export default class {
         this._activeRange = activeRange(this);
         this._fetchedRange = writable({start: undefined, end: undefined});
         this._events = events(this);
-        this._filtered = filteredEvents(this);
         this._now = now();
         this._today = today(this);
         this._intlEventTime = intlRange(this.locale, this.eventTimeFormat);
