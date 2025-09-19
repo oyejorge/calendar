@@ -81,7 +81,7 @@
 </script>
 
 {#if BaseEventComponent}
-    <BaseEventComponent bind:el {event} {...properties} />
+    <BaseEventComponent bind:el {event} {timeText} {...properties} />
 {:else}
     <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <article
